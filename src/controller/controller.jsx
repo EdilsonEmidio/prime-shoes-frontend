@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-//const tokem = localStorage.getItem("tokem")
+const token = localStorage.getItem("token")
 //headers:{
-//    Authorization:"Bearer "+tokem 
+//    Authorization:"Bearer "+token
 //  }
-// Envia uma requisição post
 
 const Axios = axios.create({
   baseURL: "http://localhost:8080/api",

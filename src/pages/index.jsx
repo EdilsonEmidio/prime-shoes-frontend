@@ -1,6 +1,7 @@
 import Cadastro from "./cadastro";
 import Home from "./home";
 import Login from "./login";
+import Perfil from "./perfil";
 
 
 const pages = [
@@ -15,6 +16,10 @@ const pages = [
   {
     element:<Cadastro/>,
     path:"/cadastro"
+  },
+  {
+    element:<Perfil/>,
+    path:"/perfil"
   }
 ]
 

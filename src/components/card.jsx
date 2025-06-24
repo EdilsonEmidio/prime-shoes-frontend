@@ -11,9 +11,9 @@ export default function Card({produto}){
           alt="Shoes" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{produto.nome}</h2>
-        <p>RS: {produto.preco}</p>
-        <p>{produto.descricao}</p>
+        <h2 className="card-title">{produto.name}</h2>
+        <p>RS: {produto.price}</p>
+        <p>{produto.description}</p>
         <div className="card-actions justify-evenly">
           <button className="btn btn-sm btn-soft btn-info">Adicionar ao carrinho</button>
           <button className="btn btn-sm btn-soft btn-success">Comprar agora</button>

@@ -3,19 +3,24 @@ import Layout from "../template/layout";
 import Card from "../components/card";
 import Menu from "../components/menu";
 import Axios from "../controller/controller";
-import { Bounce, toast } from "react-toastify";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { AxiosHeaders } from "axios";
 
 
 export default function Home(){
-  const [produtos,setProdutos] = useState([1,2,3,4,5])
+  const [produtos,setProdutos] = useState([])
+  const navigate = useNavigate()
 
   useEffect(()=>{
+
+    //Axios.defaults = new Headers({"Authorization":"Bearer "+localStorage.getItem("token")})
     Axios.get("/products").then(response=>{
       setProdutos(response.data)
-
+      
     }).catch(error=>{
 
-      toast.error("Credenciais erradas: "+error.getMessage,{
+      toast.error("Falha ao buscar produtos: "+error.getMessage,{
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -35,6 +40,7 @@ export default function Home(){
         <Menu/>
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 ml-5 mt-3">
           {
+            
             produtos.map((produto, key)=>{
               return <Card produto={produto} key={key}/>
             })
