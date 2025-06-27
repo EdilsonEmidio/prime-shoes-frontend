@@ -17,15 +17,14 @@ export default function Cadastro(){
     Axios.post("/users/register",{
       "name":name,
       "email":email,
-      "password":password,
-      "role":"BUYER"
+      "password":password
     }).then(()=>{
       
       navigate("/login")
 
-    }).catch(()=>{
+    }).catch((e)=>{
       
-      toast.error("Credenciais erradas: "+e.getMessage,{
+      toast.error("Credenciais erradas: "+e.message,{
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

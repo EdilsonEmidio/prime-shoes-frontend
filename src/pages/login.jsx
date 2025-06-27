@@ -21,23 +21,11 @@ export default function Login(){
       
     }).then((response)=>{
       localStorage.setItem("token",response.data.token)
-      /*
-      const token = localStorage.getItem("token").split(" ") 
-      Axios.post("/users/verificar",
-        {"token":token[1]}
-      
-      ).then(response=>{
-
-        console.log(response)
-      }).catch(error=>{
-
-      })
-      */
       navigate("/")
 
     }).catch((e)=>{
       
-      toast.error("Credenciais erradas: "+e.getMessage,{
+      toast.error("Credenciais erradas: "+e.message,{
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

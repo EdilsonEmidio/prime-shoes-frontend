@@ -14,13 +14,16 @@ export default function Home(){
 
   useEffect(()=>{
 
-    //Axios.defaults = new Headers({"Authorization":"Bearer "+localStorage.getItem("token")})
-    Axios.get("/products").then(response=>{
+    Axios.get("/products",{
+      headers:{
+          Authorization:"Bearer "+localStorage.getItem("token")
+        }
+    }).then(response=>{
       setProdutos(response.data)
       
     }).catch(error=>{
 
-      toast.error("Falha ao buscar produtos: "+error.getMessage,{
+      toast.error("Falha ao buscar produtos: "+error.message,{
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
