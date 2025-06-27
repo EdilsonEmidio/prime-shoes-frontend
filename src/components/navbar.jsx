@@ -10,6 +10,7 @@ export default function Navbar({items= 0, total= 0}){
 
   const logout = ()=>{
     localStorage.removeItem("token")
+    localStorage.removeItem("email")
     navigate("/login")
   }
 

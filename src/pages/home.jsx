@@ -34,9 +34,10 @@ export default function Home(){
         theme: "dark",
         transition: Bounce,
       });
-    })
-
+    }) 
   },[])
+
+  
   return(
     <Layout>
       <div className="flex">
