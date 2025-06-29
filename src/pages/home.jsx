@@ -20,12 +20,12 @@ export default function Home(){
         }
     }).then(response=>{
       setProdutos(response.data)
-      
+      console.log(response.data)
     }).catch(error=>{
 
       toast.error("Falha ao buscar produtos: "+error.message,{
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -46,7 +46,7 @@ export default function Home(){
           {
             
             produtos.map((produto, key)=>{
-              return <Card produto={produto} key={key}/>
+              return <Card comprar={true} produto={produto} key={key}/>
             })
           }
         </div>

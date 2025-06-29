@@ -5,7 +5,6 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import axios from "../controller/controller";
 
 
-
 export default function Perfil(){
 
   const [perfil, setPerfil] = useState(
@@ -26,7 +25,6 @@ export default function Perfil(){
     }
   )
   const mudarUser = (nome, value)=>{
-    console.log(perfil)
     setPerfil(prevPerfil => ({
       ...prevPerfil,
     user: {
@@ -44,13 +42,7 @@ export default function Perfil(){
   }
   const atualizarUser = (e)=>{
     e.preventDefault()
-    console.log({
-      "id":perfil.user.id,
-      "name":perfil.user.name,
-      "email":perfil.user.email,
-      "password":perfil.user.password,
-      "role":perfil.user.role,
-    })
+    
     axios.put("/users",{
       "id":perfil.user.id,
       "name":perfil.user.name,
@@ -63,7 +55,17 @@ export default function Perfil(){
       }
     })
     .then(response=>{
-
+      toast.info("Usuario atualizado com sucesso",{
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     })
     .catch(error=>{
 
@@ -71,16 +73,7 @@ export default function Perfil(){
   }
   const atualizarEndereco = (e)=>{
     e.preventDefault()
-    console.log({
-      "user":perfil.user.id,
-      "zipcode":perfil.zipcode,
-      "city":perfil.city,
-      "complement":perfil.complement,
-      "neighborhood":perfil.neighborhood,
-      "number":perfil.number,
-      "state":perfil.state,
-      "street":perfil.street,
-    })
+    
     axios.post("/address",{
       "user":perfil.user.id,
       "zipcode":perfil.zipcode,
@@ -96,7 +89,17 @@ export default function Perfil(){
       }
     })
     .then(response=>{
-      console.log(response)
+      toast.info("Endereço atualizado com sucesso",{
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     })
     .catch(error=>{
       
