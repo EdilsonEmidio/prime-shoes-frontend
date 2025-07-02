@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Layout from "../template/layout";
 import Axios from "../controller/controller";
 import CardPedido from './../components/cardPedido';
-import Card from "./../components/card";
+import Card from "../components/cardProduto";
+import { Bounce, toast } from "react-toastify";
 
 
 export default function Pedidos(){
@@ -22,7 +23,17 @@ export default function Pedidos(){
 				setPedidos(response.data)
 			})
 			.catch(error=>{
-				console.log(error)
+				toast.error("Falha ao buscar produtos: "+error.message,{
+								position: "top-right",
+								autoClose: 1000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: true,
+								progress: undefined,
+								theme: "dark",
+								transition: Bounce,
+							});
 			})
 
 	},[])

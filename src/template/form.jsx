@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 
 
 export default function Form({children,title}){
@@ -9,7 +10,7 @@ export default function Form({children,title}){
         <legend className=" text-3xl fieldset-legend">{title}</legend>
         {children}
       </fieldset>
-    
+      <ToastContainer />
     </form>
   );
 

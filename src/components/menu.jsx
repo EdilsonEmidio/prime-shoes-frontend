@@ -6,13 +6,13 @@ export default function Menu(){
 
   return(
 
-    <ul className="menu bg-base-300 rounded-box w-56">
+    <ul className="menu bg-base-300 rounded-box w-56 h-full">
       <h2>Filtros</h2>
       <li>
         <details>
           <summary>Preço</summary>
           <ul>
-            <li className="w-3/4">
+            <li className="w-3/4 my-1">
               <input type="text" id="preco" className="input input-sm" placeholder="preço maximo"/> 
             </li>
           </ul>

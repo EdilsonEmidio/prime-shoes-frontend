@@ -62,7 +62,6 @@ export default function Cadastro(){
         Confirmar
       </button>
       <button className="btn btn-link" onClick={()=>navigate("/login")}>Já tem uma conta?</button>
-      <ToastContainer />
     </Form>
   )
 }

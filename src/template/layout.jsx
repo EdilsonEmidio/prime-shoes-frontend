@@ -2,6 +2,7 @@
 import { useEffect } from "react"
 import Navbar from "../components/navbar"
 import { useNavigate } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
 
 export default function Layout({children}){
 
@@ -16,9 +17,10 @@ export default function Layout({children}){
   
   
   return(
-    <>
+    <div className="h-screen">
       <Navbar/>
       {children}
-    </>
+      <ToastContainer />
+    </div>
   )
 }

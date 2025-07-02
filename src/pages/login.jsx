@@ -57,7 +57,7 @@ export default function Login(){
         Confirmar
       </button>
       <button className="btn btn-link" onClick={()=>navigate("/Cadastro")}>Não tem uma conta?</button>
-      <ToastContainer />
+      
     </Form>
   )
 }
