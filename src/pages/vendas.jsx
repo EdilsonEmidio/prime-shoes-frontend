@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import Layout from "../template/layout";
 import Axios from "../controller/controller";
-import { Bounce,} from "react-toastify";
-import Card from "../components/cardProduto";
-import CardProduto from "../components/cardProduto";
+import { Bounce, toast,} from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CardSeuProduto from "../components/cardSeuProduto";
 
 
 
@@ -13,6 +12,10 @@ export default function Vendas(){
   const [produtos, setProdutos] = useState([])
   const navigate = useNavigate()
  
+  const tratar = (name, value)=>{
+    const valores = value.split("\\")
+    mudar(name, valores[2])
+  }
   const mudar = (name, value)=>{
     setProduto(prevProduto=>({
       ...prevProduto,
@@ -22,21 +25,40 @@ export default function Vendas(){
   }
   const enviarProduto = (e)=>{
     e.preventDefault()
-    console.log(produto)
     Axios.post("/products",produto,{
       headers:{
         Authorization:"Bearer "+localStorage.getItem("token")
       }
     }).then(response=>{
-      console.log(response.data) 
-      navigate
+      toast.info("Produto cadastrado com sucesso",{
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
 
     }).catch(error=>{
-      console.log(error)
+      toast.error("Problema para cadastrar produto: "+error.message,{
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     })
   }
 
   useEffect(()=>{
+    
     Axios.get("/products/user/"+localStorage.getItem("id"),{
       headers:{
         Authorization:"Bearer "+localStorage.getItem("token")
@@ -45,7 +67,7 @@ export default function Vendas(){
       setProdutos(response.data)
       console.log(response.data)
     }).catch(error=>{
-      console.log(error)
+      
     })
   },[])
 
@@ -69,10 +91,10 @@ export default function Vendas(){
 
           <label className="label">Marca</label>
           <input type="text" onChange={(e)=>mudar(e.target.id, e.target.value)} id="brand" className="input" placeholder="preço" />
-          {/*
+          
           <label className="label">Imagem</label>
-          <input type="file" onChange={(e)=>{mudar(e.target.id, e.target.files[0])}} id="image" className="file-input" />
-          */}
+          <input type="file" onChange={(e)=>{tratar(e.target.id, e.target.value)}} id="image" className="file-input" />
+         
           <button type="submit" onClick={(e)=>enviarProduto(e)} className="btn btn-accent mt-5">Publicar</button>
         </fieldset>
         
@@ -81,7 +103,7 @@ export default function Vendas(){
           <div className="flex gap-5">
             {
               produtos.map((produto)=>{
-                return <CardProduto url={"/editar/produto"} clicavel={true} key={produto.id} produto={produto} />
+                return <CardSeuProduto url={"/editar/produto"} clicavel={true} key={produto.id} produto={produto} />
               })
             }
           </div>

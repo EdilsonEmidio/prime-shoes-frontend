@@ -2,6 +2,7 @@ import Cadastro from "./cadastro";
 import Carrinho from "./carrinho";
 import Comprar from "./comprar";
 import Editar from "./editar";
+import Erro from "./erro";
 import Home from "./home";
 import Login from "./login";
 import Pedidos from "./pedidos";
@@ -40,11 +41,15 @@ const pages = [
   },
   {
     element:<Editar/>,
-    path:"/editar/produto/*"
+    path:"/editar/produto"
   },
   {
     element:<Comprar/>,
-    path:"/comprar/produto/*"
+    path:"/comprar/produto"
+  },
+  {
+    element:<Erro/>,
+    path:"/*"
   }
 ]
 

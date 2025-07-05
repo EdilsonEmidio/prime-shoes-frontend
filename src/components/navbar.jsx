@@ -7,14 +7,17 @@ import { useEffect, useState } from "react";
 import Axios from "../controller/controller";
 
 
-export default function Navbar({items= 0, total= 0}){
+export default function Navbar(){
 
+  const [items, setItems] = useState(0)
+  const [total, setTotal] = useState(0)
   const navigate = useNavigate()
   const [user,setUser] = useState({"role":"BUYER"})
 
   const logout = ()=>{
     localStorage.removeItem("token")
     localStorage.removeItem("email")
+    localStorage.removeItem("id")
     navigate("/login")
   }
 
@@ -28,8 +31,27 @@ export default function Navbar({items= 0, total= 0}){
       }).then(response=>{
         setUser(response.data)
       }).catch(error=>{
-
+        console.log(error)
       })
+      
+    Axios.get("/carts/items/"+localStorage.getItem("id"),{
+      headers:{
+        Authorization:"Bearer "+localStorage.getItem("token")
+      }
+    }).then(response=>{
+      setItems(response.data.quantity)
+      let somaItems = 0
+      let somaTotal = 0
+      response.data.forEach(element=>{
+        somaItems += element.quantity
+        somaTotal += element.subtotal
+      })
+      setItems(somaItems)
+      setTotal(somaTotal)
+    }).catch(error=>{
+      console.log(error)
+    })
+      
   },[])
 
   return(
@@ -42,12 +64,11 @@ export default function Navbar({items= 0, total= 0}){
           <h1 className="text-3xl ml-3 self-center font-bold " >Prime Shoes</h1>
         </div>
 
-
         <div className="flex self-center">
 
           <div className="dropdown">
             <div tabIndex={0} role="button" className="p-2 hover:bg-emerald-950 rounded-md cursor-pointer">
-              <img  src={carrinho} alt="icone de carrinho" className="w-10 h-10"/>
+              <img src={carrinho} alt="icone de carrinho" className="w-10 h-10"/>
             </div>
             <ul tabIndex={0} className="dropdown-content menu  rounded-xl bg-rose-50 text-black w-30 p-1">
                 <li className="p-1" >Items: {items}</li>

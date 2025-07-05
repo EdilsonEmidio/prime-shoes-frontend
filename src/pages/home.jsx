@@ -10,6 +10,7 @@ export default function Home(){
   const [produtos,setProdutos] = useState([])
 
   useEffect(()=>{
+
     Axios.post("/users/find",
       {"email":localStorage.getItem("email")},{
         headers:{
@@ -28,7 +29,8 @@ export default function Home(){
           progress: undefined,
           theme: "dark",
           transition: Bounce,
-        });      })
+        });      
+      })
 
     Axios.get("/products",{
       headers:{
@@ -36,6 +38,7 @@ export default function Home(){
         }
     }).then(response=>{
       setProdutos(response.data)
+      console.log(response.data)
     }).catch(error=>{
 
       toast.error("Falha ao buscar produtos: "+error.message,{
@@ -61,7 +64,7 @@ export default function Home(){
           {
             
             produtos.map((produto)=>{
-              return <CardProduto url={"/comprar/produto"} produto={produto} key={produto.id}/>
+              return <CardProduto url={"/comprar/produto"} clicavel={true} produto={produto} key={produto.id}/>
             })
           }
         </div>
